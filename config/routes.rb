@@ -1,3 +1,6 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+	resources :restaurants, defaults: { format: "json"}
+	get '/restaurants/statistics?latitude=x&longitude=y&radius=z', 
+	to: 'restaurants#show', defaults: { format: "json"}
 end
