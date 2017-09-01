@@ -9,7 +9,7 @@ class RestaurantsController < ApplicationController
 
 	def create
 		@restaurant = Restaurant.create!(restaurant_params)
-    json_response(@restaurant, :created)
+		json_response(@restaurant, :created)
 	end
 
 	def update
@@ -45,13 +45,13 @@ class RestaurantsController < ApplicationController
 
 	private
 
-	def restaurant_params
-		params.permit(:id, :rating, :name, :site, :email, :phone, :street, :city, :state, :lat, :lng)
-	end
+		def restaurant_params
+			params.permit(:id, :rating, :name, :site, :email, :phone, :street, :city, :state, :lat, :lng)
+		end
 
-	def set_restaurant
-    @restaurant = Restaurant.find(params[:id])
-  end
+		def set_restaurant
+	    @restaurant = Restaurant.find(params[:id])
+	  end
 
 end
 
