@@ -28,7 +28,6 @@ class RestaurantsController < ApplicationController
 		rad = params[:radius].to_i
 
 		@nearby_restaurants = Restaurant.nearby_restaurants(lat, lon, rad)
-		@count = @nearby_restaurants.count
 
 		rating_array = []
 
@@ -36,10 +35,13 @@ class RestaurantsController < ApplicationController
 			rating_array << restaurant.rating
 		end
 
-		@avg = rating_array.average
-		@std = rating_array.standard_deviation
+		@array_response = {
+			"count" => @nearby_restaurants.count, 
+			"avg" => rating_array.average, 
+			"std" => rating_array.standard_deviation
+		}
 
-		# json_response(@restaurant, :created)
+		json_response(@array_response, :created)
 		
 	end
 
