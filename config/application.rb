@@ -31,3 +31,11 @@ module RestaurantesApi
     config.api_only = true
   end
 end
+
+module ActiveRecord
+  class Base
+    def self.establish_connection(spec = ENV["DATABASE_URL"].try(:gsub, "postgres", "postgis"))
+      super(spec)
+    end
+  end
+end
