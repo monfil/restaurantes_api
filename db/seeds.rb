@@ -15,5 +15,6 @@ csv.each do |row|
   t.state = row['state']
   t.lat = row['lat']
   t.lng = row['lng']
+
   t.save
 end

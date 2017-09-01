@@ -23,14 +23,24 @@ class RestaurantsController < ApplicationController
 	end
 
 	def show
-		p "INSIDE STATISTICS"
+		lat = params[:latitude].to_f
+		lon = params[:longitud].to_f
+		rad = params[:radius].to_i
 
-		p params
-		p params[:latitude]
-		p params[:longitud]
-		# @restaurants = Restaurant.where(lat: params[:lat])
+		@nearby_restaurants = Restaurant.nearby_restaurants(lat, lon, rad)
+		@count = @nearby_restaurants.count
 
-		@restaurants = Restaurant.find(:all, :origin => [params[:latitude], params[:longitud]], :within => params[:radius])
+		rating_array = []
+
+		@nearby_restaurants.each do |restaurant|
+			rating_array << restaurant.rating
+		end
+
+		@avg = rating_array.average
+		@std = rating_array.standard_deviation
+
+		# json_response(@restaurant, :created)
+		
 	end
 
 	private
@@ -44,3 +54,25 @@ class RestaurantsController < ApplicationController
   end
 
 end
+
+module Enumerable
+
+    def sum
+      self.inject(0){|accum, i| accum + i }
+    end
+
+    def average
+      self.sum/self.length.to_f
+    end
+
+    def sample_variance
+      m = self.average
+      sum = self.inject(0){|accum, i| accum +(i-m)**2 }
+      sum/(self.length - 1).to_f
+    end
+
+    def standard_deviation
+      return Math.sqrt(self.sample_variance)
+    end
+
+end 

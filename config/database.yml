@@ -22,8 +22,13 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
-  <<: *default
+  # <<: *default
   database: restaurantes_api_development
+# *********
+  # username:           fabiola
+  adapter:            postgis
+  host:               localhost
+  schema_search_path: public
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.

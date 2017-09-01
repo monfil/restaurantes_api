@@ -12,6 +12,10 @@ gem 'pg', '~> 0.18'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 
+gem 'activerecord-postgis-adapter'
+# gem 'activerecord-jdbcpostgresql-adapter', '~> 1.3.9'
+# gem 'ffi-geos'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

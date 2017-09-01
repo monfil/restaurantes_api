@@ -1,5 +1,4 @@
 require 'rails_helper'
-# require 'support/factory_girl.rb'
 
 RSpec.describe 'Restaurants info api', type: :request do
 	
